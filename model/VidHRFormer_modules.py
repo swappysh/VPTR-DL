@@ -199,6 +199,7 @@ class VidHRFormerBlockDecNAR(nn.Module):
         else:
             tgt = self.norm5(tgt2)
             T1 = memory.shape[1]
+            print(memory.shape, T1, N, H, W, C)
             memory = memory.permute(1, 0, 2, 3, 4).reshape(T1, N*H*W, C)
             query_pos = query_pos.permute(1, 0, 2, 3, 4).reshape(T2, N*H*W, C)
             tgt2 = tgt2 + self.drop_path1(self.EncDecAttn(query = tgt+query_pos+future_query_temporal_pos_embed[:, None, :], 
